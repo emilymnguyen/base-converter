@@ -1,6 +1,6 @@
 body {
-    background-color: #173B54;
-    color: white;
+    background-color: white;
+    color: black;
     font-family: 'Glegoo', sans-serif;
 }
 
@@ -8,6 +8,7 @@ h1 {
     font-weight: 200;
     font-size: 50px;
     text-transform: lowercase;
+    text-align: center;
 }
 
 input:focus {
@@ -16,12 +17,12 @@ input:focus {
 input {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    border-bottom: 1.9px solid white;
+    border-bottom: 1.9px solid black;
     font-size: 30px;
     padding: 3px 0px 4px 0px;
     width: 500px;
     letter-spacing: 1px;
-    color: white;
+    color: black;
     text-align: center;
     font-weight: 200;
 }
@@ -71,6 +72,7 @@ form {
 #unit1 span, #unit2 span {
     padding: 0px 12px 0px 12px;
     opacity: 0.4;
+    
     
 }
 #unit1 .active-unit, #unit2 .active-unit {
