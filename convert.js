@@ -1,12 +1,20 @@
-
+/*
+ * Get value in first input box
+ */
 function getVal1() {
   return $("[name='val1']").val();
 };
 
+/*
+ * Get value in second input box
+ */
 function getVal2() {
   return $("[name='val2']").val();
 };
 
+/*
+ * Update which unit is active upon click; add/remove active-unit class
+ */
 function switchUnits(newUnit, whichUnit) {
     if (whichUnit == 1)
         var unit = "#unit1";
@@ -22,11 +30,17 @@ function switchUnits(newUnit, whichUnit) {
         $("[name='n"+ whichUnit +"']").select();
 };
 
+/*
+ * Get remainder when base is > 10
+ */
 function getHexRemainder(remainder) {
     var charCode = 55 + remainder;
     return String.fromCharCode(charCode);
 };
 
+/*
+ * Converts a decimal to a given base
+ */
 function decToBaseN(dec, base) {
     var num = [];
     
@@ -45,10 +59,16 @@ function decToBaseN(dec, base) {
     return num.join("");
 };
 
+/*
+ * Converts a number in a given base to decimal
+ */
 function baseNtoDec(num, base) {
     return parseInt(num, base);  
 };
 
+/*
+ * Get the corresponding base of the unit that was clicked on
+ */
 function getUnit(whichUnit) {
     if (whichUnit == 1)
         var unit = '#unit1';
@@ -65,6 +85,9 @@ function getUnit(whichUnit) {
         return $("[name='n" + whichUnit + "']").val();
 }
 
+/*
+ * Convert the inputed num
+ */
 function convert(num) {
     var fromBase = getUnit(1);
     var toBase = getUnit(2);
@@ -79,8 +102,12 @@ function convert(num) {
     }   
 }
 
+/*
+ * MAIN FUNCTION
+ */
 var main = function() {
   
+    // Update active-unit upon click
     $('#unit1 span').click(function () {
         switchUnits(this, 1);
     });
@@ -88,13 +115,13 @@ var main = function() {
         switchUnits(this, 2);
     });
     
+    // CONVERT BUTTON
     $('.convert').click(function () {
         var num = convert(getVal1());
         $("[name='val2']").val(num);
     });
     
- 
-    
+    // CLEAR BUTTON
     $('.clear').click(function () {
         $("[name='val1']").val('');
         $("[name='val2']").val('');
