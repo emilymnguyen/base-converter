@@ -1,6 +1,6 @@
 body {
-    background-color: white;
-    color: black;
+    background-color: #62d1e5;
+    color: white;
     font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -15,17 +15,18 @@ input:focus {
     outline-width: 0px;
 }
 input {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 1);
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     font-size: 30px;
-    padding: 3px 0px 4px 0px;
+    padding: 5px 0px 4px 0px;
     width: 500px;
     letter-spacing: 1px;
-    color: black;
+    color: #383838;
     text-align: center;
     font-weight: 200;
     font-family: 'Nunito Sans', sans-serif;
+    border-radius: 3px;
 }
 .valInput {
      margin: 10px 0px 40px 0px;
@@ -72,10 +73,9 @@ form {
 
 #unit1 span, #unit2 span {
     padding: 0px 12px 0px 12px;
-    opacity: 0.4;
-    
-    
+    opacity: 0.3;  
 }
+
 #unit1 .active-unit, #unit2 .active-unit {
     opacity: 1;
 }
@@ -84,4 +84,9 @@ form {
     padding: 0;
     border: none;
      text-align: left;
+     background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+.dec {
+    margin-left: 6px;
 }
