@@ -2,11 +2,46 @@
 <html>
 
   <head>
+    <meta charset="utf-8"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="convert.js"></script>
+      
     <title>Converter</title>
   </head>
   
   <body>
-    <h1>Hello></h1>
+    <div id="container">
+    <h1>Converter</h1>
+        <ul>
+            <li>
+      <form>
+  <div id="unit1">
+            <span class="dec active-unit">decimal</span>
+            <span class="bin">binary</span>
+            <span class="hex">hexadecimal</span>
+            <span class="baseN">base&nbsp;<input value="n" maxLength="2" type="text" name="n1"></span>
+       </div>
+          <div class="valInput">
+              <input type="text" name="val1"></div>
+ <div id="unit2">
+            <span class="dec">decimal</span>
+            <span class="bin active-unit">binary</span>
+            <span class="hex">hexadecimal</span>
+             <span class="baseN">base&nbsp;<input value="n" maxLength="2" type="text" name="n2"></span>
+       </div>
+          <div class="valInput">
+            <input type="text" name="val2"></div>
+</form>
+                </li>
+            </ul>
+        <div id="buttons">
+            <span class="convert">convert</span>
+            <span class="reverse">reverse</span>
+            <span class="clear">clear</span>
+            <span class="add">+</span>
+       </div>
+    </div>
   </body>
   
 </html>

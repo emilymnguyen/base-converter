@@ -1,0 +1,74 @@
+body {
+    background-color: #13AFED;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+input:focus {
+    outline-width: 0px;
+}
+input {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: 3px solid white;
+    font-size: 30px;
+    padding: 0px 0px 4px 0px;
+    width: 546px;
+   
+    color: white;
+    text-align: center;
+}
+.valInput {
+     margin: 10px 0px 30px 0px;
+}
+#container {
+    width: 550px;
+    position: relative;
+    left: 50%;
+    margin-left: -275px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    
+}
+form {
+    font-size: 24px;
+}
+#buttons {
+    width: 100%;
+    text-align: center;
+}
+#buttons span:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+#buttons span {
+    padding: 0px 10px 0px 10px;
+}
+
+#unit1, #unit2 {
+    text-align: center;
+}
+
+#unit1 span:hover, #unit2 span:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#unit1 span, #unit2 span {
+    padding: 0px 10px 0px 10px;
+    opacity: 0.4;
+    font-size: 20px;
+}
+#unit1 .active-unit, #unit2 .active-unit {
+    opacity: 1;
+}
+.baseN input {
+    width: 30px;
+    padding: 0;
+    border: none;
+    font-size: 20px;
+}
