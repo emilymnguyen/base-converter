@@ -19,11 +19,11 @@ input {
     border: none;
     border-bottom: 1px solid white;
     font-size: 30px;
-    padding: 5px 0px 4px 0px;
-    width: 500px;
+    padding: 5px 9px 4px 9px;
+    width: 482px;
     letter-spacing: 1px;
     color: #383838;
-    text-align: center;
+    text-align: left;
     font-weight: 200;
     font-family: 'Nunito Sans', sans-serif;
     border-radius: 3px;
@@ -36,6 +36,18 @@ input {
     position: relative;
     left: 50%;
     margin-left: -250px;
+}
+#messages {
+    background-color:rgba(255, 255, 255, .1);
+    height: 100px;
+    width: 150px;
+    position: relative;
+    left: 50%;
+    margin-left: 270px;
+    margin-top: -240px;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 0.5px;
 }
 ul {
     list-style: none;
