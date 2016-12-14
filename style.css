@@ -1,7 +1,13 @@
 body {
-    background-color: #13AFED;
+    background-color: #173B54;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Glegoo', sans-serif;
+}
+
+h1 {
+    font-weight: 200;
+    font-size: 50px;
+    text-transform: lowercase;
 }
 
 input:focus {
@@ -10,36 +16,37 @@ input:focus {
 input {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    border-bottom: 3px solid white;
+    border-bottom: 1.9px solid white;
     font-size: 30px;
-    padding: 0px 0px 4px 0px;
-    width: 546px;
-   
+    padding: 3px 0px 4px 0px;
+    width: 500px;
+    letter-spacing: 1px;
     color: white;
     text-align: center;
+    font-weight: 200;
 }
 .valInput {
      margin: 10px 0px 40px 0px;
 } 
 #container {
-    width: 550px;
+    width: 500px;
     position: relative;
     left: 50%;
-    margin-left: -275px;
+    margin-left: -250px;
 }
 ul {
     list-style: none;
     padding: 0;
 }
-li {
-    
-}
+
 form {
     font-size: 24px;
 }
 #buttons {
     width: 100%;
     text-align: center;
+    letter-spacing: 0.5px;
+    font-weight: 700;
 }
 #buttons span:hover {
     cursor: pointer;
@@ -49,8 +56,11 @@ form {
     padding: 0px 10px 0px 10px;
 }
 
-#unit1, #unit2 {
+#unit1, #unit2, .baseN input {
     text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.5px;
 }
 
 #unit1 span:hover, #unit2 span:hover {
@@ -59,9 +69,9 @@ form {
 }
 
 #unit1 span, #unit2 span {
-    padding: 0px 10px 0px 10px;
+    padding: 0px 12px 0px 12px;
     opacity: 0.4;
-    font-size: 20px;
+    
 }
 #unit1 .active-unit, #unit2 .active-unit {
     opacity: 1;
@@ -70,5 +80,5 @@ form {
     width: 30px;
     padding: 0;
     border: none;
-    font-size: 20px;
+     text-align: left;
 }
