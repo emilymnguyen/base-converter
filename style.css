@@ -1,7 +1,7 @@
 body {
     background-color: white;
     color: black;
-    font-family: 'Glegoo', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 h1 {
@@ -15,9 +15,9 @@ input:focus {
     outline-width: 0px;
 }
 input {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
     border: none;
-    border-bottom: 1.9px solid black;
+    border-bottom: 1px solid black;
     font-size: 30px;
     padding: 3px 0px 4px 0px;
     width: 500px;
@@ -25,6 +25,7 @@ input {
     color: black;
     text-align: center;
     font-weight: 200;
+    font-family: 'Nunito Sans', sans-serif;
 }
 .valInput {
      margin: 10px 0px 40px 0px;
@@ -46,8 +47,8 @@ form {
 #buttons {
     width: 100%;
     text-align: center;
-    letter-spacing: 0.5px;
-    font-weight: 700;
+    letter-spacing: 1.0px;
+    font-weight: 200;
 }
 #buttons span:hover {
     cursor: pointer;
@@ -59,9 +60,9 @@ form {
 
 #unit1, #unit2, .baseN input {
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 20px;
-    letter-spacing: 0.5px;
+    letter-spacig: 0.5px;
 }
 
 #unit1 span:hover, #unit2 span:hover {
