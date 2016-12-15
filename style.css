@@ -38,16 +38,21 @@ input {
     margin-left: -250px;
 }
 #messages {
-    background-color:rgba(255, 255, 255, .1);
-    height: 100px;
-    width: 150px;
+    background-color:rgba(255, 255, 255, 0);
+    width: 130px;
     position: relative;
     left: 50%;
     margin-left: 270px;
-    margin-top: -240px;
+    margin-top: -245px;
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 0.5px;
+}
+.message1, .message2 {
+    height: 100px;
+}
+.message2 {
+    margin-top: 31px;
 }
 ul {
     list-style: none;

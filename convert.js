@@ -168,22 +168,108 @@ function convert(num) {
 /*
  * Check that input for n1/n2 is valid
  */
-function checkN(input, whichN) {
-    var n = $(input).val();
+function checkN(whichN) {
+    var n = $("[name='n"+ whichN +"']").val();
     
-    // Return if valid input
-    if (n == parseInt(n, 10) && n && n < 37 && n > 0)
-        return;
-    
-    // Return if value is still n
-    if (n == "n")
-        return;
+    // Return if valid input or still n
+    if ((n == parseInt(n, 10) && n && n < 37 && n > 0) || n == "n") {
+        $('.message' + whichN).text("");
+        return true;
+    }
     
     // Reset to n and show error message otherwise
-     $(input).val("n");
+   //  $("[name='n"+ whichN +"']").val("n");
      $('.message' + whichN).text("Invalid value for n! n must be an integer between 0 and 37.");
-    
+    return false;
 };
+
+function checkInput() {
+    var base = getUnit(1);
+    var input = $("[name='val1']").val();
+    
+    /*
+    // If base n was selected without an n
+    if (base == "n") {
+         $('.message1').text("Must enter a value for n!");
+        return false;
+    }*/
+    
+    
+    // Check unary
+    if (base == 1) {
+        for (var i = 0; i < input.length; i++) {
+            if (input.charCodeAt(i) != 49) {
+                $('.message1').text("Invalid input: a unary number may only contain the digit 1.");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+    // Check binary
+    else if (base == 2) {
+        for (var i = 0; i < input.length; i++) {
+            
+            if (input.charCodeAt(i) != 48 && input.charCodeAt(i) != 49) {
+                $('.message1').text("Invalid input: a binary number may only contain digits 0 and 1.");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+// Check decimal
+       else if (base == 10) {
+         
+        for (var i = 0; i < input.length; i++) {
+            if (input.charCodeAt(i) < 48 || input.charCodeAt(i) > 57) {
+                $('.message1').text("Invalid input: a decimal number may only contain digits 0-9.");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+    
+    // Check hexadecimal
+       else if (base == 16) {
+           // Check for 0x
+           if (input.charAt(0) == '0' && input.charAt(1) == 'x')
+               var start = 2;
+           else
+               var start = 0;
+        // Check that all chars are 0-9, A-F, a-f
+        for (var i = start; i < input.length; i++) {
+            var c = input.charCodeAt(i);
+            if ((c < 48 || c > 57) && (c < 65 || c > 70) && (c < 97 || c > 102)){
+                $('.message1').text("Invalid input: a hexadecimal number may only contain digits 0-9 and characters A-F.");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+/*
+ * Check if N is valid before converting
+ */
+function checkConvertN(whichN) {
+     // Return if n is still n
+       if ($('#unit'+ whichN +' .baseN').hasClass('active-unit') && checkN(whichN)) {
+            if ($("[name='n"+ whichN +"']").val() === 'n') {
+                $('.message'+whichN).text("Must enter a value for n!");
+                // Clear output box
+                $("[name='val2']").val('');
+                return false;
+            }
+        }
+        // Return if n is invalid
+        else if ($('#unit'+ whichN +' .baseN').hasClass('active-unit') && !checkN(whichN)) {
+            // Clear output box
+            $("[name='val2']").val('');
+                return false;
+        }
+    return true;
+}
 
 /*
  * MAIN FUNCTION
@@ -200,8 +286,21 @@ var main = function() {
     
     // CONVERT BUTTON
     $('.convert').click(function () {
-        var num = convert(getVal1());
-        $("[name='val2']").val(num);
+        
+        // CHECK N 
+        if ($('#unit1 .baseN').hasClass('active-unit') || $('#unit2 .baseN').hasClass('active-unit')) {
+        
+            var validBase1 = checkConvertN(1);
+            var validBase2 = checkConvertN(2);
+        
+            if (!validBase1 || !validBase2)
+                return;
+        }
+       
+            if (checkInput()) {
+                var num = convert(getVal1());
+                $("[name='val2']").val(num);
+            }  
     });
     
     // REVERSE BUTTON
@@ -218,12 +317,19 @@ var main = function() {
     
     // CHECK INPUT FOR N
     $("[name='n1']").on('blur',function () {
-       checkN(this, 1);
+       checkN(1);
     });
     $("[name='n2']").on('blur',function () {
-       checkN(this, 2);
+       checkN(2);
     });
-    
+   
+    // CLEAR MESSAGES ON NEW UNIT CLICK
+      $('#unit1 span').click(function () {
+       $('.message' + 1).text("");
+    });
+       $('#unit2 span').click(function () {
+        $('.message' + 2).text("");
+    });
    
 };
 
