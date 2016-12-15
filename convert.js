@@ -187,6 +187,8 @@ function checkInput() {
     var base = getUnit(1);
     var input = $("[name='val1']").val();
     
+   
+    
     // Remove spaces
     input = input.replace(/\s/g, '');
     
@@ -241,6 +243,40 @@ function checkInput() {
             var c = input.charCodeAt(i);
             if ((c < 48 || c > 57) && (c < 65 || c > 70) && (c < 97 || c > 102)){
                 $('.message1').text("Invalid input: a hexadecimal number may only contain digits 0-9 and characters A-F.");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+    // Check base when n < 10
+       else if (base < 10) {
+           var limit = parseInt(base) + 47;
+         
+        for (var i = 0; i < input.length; i++) {
+            c = input.charCodeAt(i);
+
+            if (c < 48 || c > limit) {    
+                $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-"+(base-1)+".");
+                $("[name='val2']").val("");
+                return false;
+            }
+        }
+    }
+    
+    // Check base when n > 10
+      else if (base > 10) {
+           var uppercaseLim = parseInt(base) + 54;
+          var lowercaseLim = parseInt(base) + 86;
+         
+        for (var i = 0; i < input.length; i++) {
+            c = input.charCodeAt(i);
+            // Check 0-9, A-uppercaseLim, a-lowercaseLim
+            if ((c < 48 || c > 57) && (c < 65 || c > uppercaseLim) && (c < 97 || c > lowercaseLim)) {   
+                // Message for base 11
+                if (base == 11)
+                     $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and character A.");
+                else
+                     $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and characters A-"+String.fromCharCode(uppercaseLim)+".");
                 $("[name='val2']").val("");
                 return false;
             }
