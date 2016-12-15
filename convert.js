@@ -187,13 +187,11 @@ function checkInput() {
     var base = getUnit(1);
     var input = $("[name='val1']").val();
     
-    /*
-    // If base n was selected without an n
-    if (base == "n") {
-         $('.message1').text("Must enter a value for n!");
+    // Return and clear output if no input
+    if (input.length == 0) {
+        $("[name='val2']").val("");
         return false;
-    }*/
-    
+    }
     
     // Check unary
     if (base == 1) {
@@ -296,7 +294,7 @@ var main = function() {
             if (!validBase1 || !validBase2)
                 return;
         }
-       
+       // Check input then convert
             if (checkInput()) {
                 var num = convert(getVal1());
                 $("[name='val2']").val(num);
