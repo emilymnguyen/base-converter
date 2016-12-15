@@ -187,6 +187,9 @@ function checkInput() {
     var base = getUnit(1);
     var input = $("[name='val1']").val();
     
+    // Remove spaces
+    input = input.replace(/\s/g, '');
+    
     // Return and clear output if no input
     if (input.length == 0) {
         $("[name='val2']").val("");
@@ -296,7 +299,11 @@ var main = function() {
         }
        // Check input then convert
             if (checkInput()) {
-                var num = convert(getVal1());
+                var input = getVal1();
+                // Remove spaces
+                input = input.replace(/\s/g, '');
+                
+                var num = convert(input);
                 $("[name='val2']").val(num);
             }  
     });
