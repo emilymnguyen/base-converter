@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #f9f9f9;
     color: #303030;
     font-family: 'Nunito Sans', sans-serif;
 }
@@ -15,7 +15,7 @@ input:focus {
     outline-width: 0px;
 }
 .valInput input {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.04);
     border: none;
     font-size: 30px;
     padding: 5px 19px 4px 19px;
@@ -96,12 +96,11 @@ form {
 #unit1 span, #unit2 span {
     padding: 0px 12px 0px 12px;
     opacity: 0.3;  
-    fot-weight: 200;
+    
 }
 
 #unit1 .active-unit, #unit2 .active-unit {
     opacity: 1;
-    font-weight: 600;
 }
 .baseN input {
     width: 30px;
@@ -109,8 +108,9 @@ form {
     border: none;
      text-align: left;
      background-color: rgba(255, 255, 255, 0);
-     font-weight: 600;
+     font-weight: 400;
 }
+
 .dec {
     margin-left: 6px;
 }
