@@ -1,31 +1,28 @@
 /*
  * Get value in first input box
  */
-function getVal1() {
-  return $("[name='val1']").val();
+function getVal1(par) {
+  return  $(par).find("[name='val1']").val();
 };
 
 /*
  * Get value in second input box
  */
-function getVal2() {
-  return $("[name='val2']").val();
+function getVal2(par) {
+  return  $(par).find("[name='val2']").val();
 };
 
 /*
  * Returns class of the current active unit
  */
-function getUnitClass(whichUnit) {
-    if (whichUnit == 1)
-        var unit = "#unit1";
-    else
-        var unit = "#unit2";
+function getUnitClass(par, whichUnit) {
+    var activeUnit = $(par).find('#unit'+ whichUnit +' .active-unit');
     
-    if ($(unit +' .active-unit').hasClass('dec') == true)
+    if ($(activeUnit).hasClass('dec') == true)
         return "dec";
-    if ($(unit +' .active-unit').hasClass('bin') == true)
+    if ($(activeUnit).hasClass('bin') == true)
         return "bin";
-    if ($(unit +' .active-unit').hasClass('hex') == true)
+    if ($(activeUnit).hasClass('hex') == true)
         return "hex";
     else
         return "baseN";
@@ -40,40 +37,52 @@ function switchUnits(newUnit, whichUnit) {
     else
         var unit = "#unit2";
 
+    // Get active unit within parent li
+    var oldActive = $(newUnit).closest('li').find(unit).find('.active-unit');
+    $(oldActive).removeClass('active-unit');
+  
     // Update active unit
-  $(unit +' .active-unit').removeClass('active-unit');
   $(newUnit).addClass('active-unit');
     
+    // Get new active unit
+     var newActive = $(newUnit).closest('li').find(unit).find('.active-unit');
+    
     // Highlight n if base n was clicked
-    if ($(unit +' .active-unit').hasClass('baseN') == true)
-        $("[name='n"+ whichUnit +"']").select();
+    if ($(newActive).hasClass('baseN') == true)
+        $(newActive).find("[name='n"+ whichUnit +"']").select();
 };
 
 /*
  * Reverse the selected units
  */
-function reverseUnits() {
+function reverseUnits(par) {
   // Get unit 1 and unit 2 values
-  var unit1 = getUnitClass(1);
-    var unit2 = getUnitClass(2);
+  var unit1 = getUnitClass(par, 1);
+    var unit2 = getUnitClass(par, 2);
     
     // Switch
-    $('#unit1 .active-unit').removeClass('active-unit');
-  $('#unit1 .' + unit2).addClass('active-unit');
+    $(par).find('#unit1 .active-unit').removeClass('active-unit');
+  $(par).find('#unit1 .' + unit2).addClass('active-unit');
     
-     $('#unit2 .active-unit').removeClass('active-unit');
-  $('#unit2 .' + unit1).addClass('active-unit');
+     $(par).find('#unit2 .active-unit').removeClass('active-unit');
+  $(par).find('#unit2 .' + unit1).addClass('active-unit');
     
     // Switch n1 and n2
-    var n1 = $("[name='n1']").val();
-    $("[name='n1']").val($("[name='n2']").val());
-    $("[name='n2']").val(n1);
+    var n1 = $(par).find("[name='n1']").val();
+    $(par).find("[name='n1']").val($(par).find("[name='n2']").val());
+    $(par).find("[name='n2']").val(n1);
     
     // Switch inputs
-    var val1 = $("[name='val1']").val();
-    $("[name='val1']").val($("[name='val2']").val());
-    $("[name='val2']").val(val1);
+    var val1 = $(par).find("[name='val1']").val();
+    $(par).find("[name='val1']").val($(par).find("[name='val2']").val());
+    $(par).find("[name='val2']").val(val1);
     
+    // Switch messages
+    var m1 = $(par).find('.message1').text();
+    $(par).find('.message1').text($(par).find('.message2').text());
+    $(par).find('.message2').text(m1);
+    
+    return;
 };
 
 /*
@@ -132,28 +141,30 @@ function baseNtoDec(num, base) {
 /*
  * Get the corresponding base of the unit that was clicked on
  */
-function getUnit(whichUnit) {
+function getUnit(par, whichUnit) {
     if (whichUnit == 1)
         var unit = '#unit1';
     else
         var unit = '#unit2';
     
-    if ($(unit +' .active-unit').hasClass('dec') == true)
+    var activeUnit = $(par).find(unit +' .active-unit');
+    
+    if ($(activeUnit).hasClass('dec') == true)
         return 10;
-    if ($(unit +' .active-unit').hasClass('bin') == true)
+    if ($(activeUnit).hasClass('bin') == true)
         return 2;
-    if ($(unit +' .active-unit').hasClass('hex') == true)
+    if ($(activeUnit).hasClass('hex') == true)
         return 16;
-    if ($(unit +' .active-unit').hasClass('baseN') == true)
-        return $("[name='n" + whichUnit + "']").val();
+    if ($(activeUnit).hasClass('baseN') == true)
+        return $(par).find("[name='n" + whichUnit + "']").val();
 }
 
 /*
  * Convert the inputed num
  */
-function convert(num) {
-    var fromBase = getUnit(1);
-    var toBase = getUnit(2);
+function convert(par, num) {
+    var fromBase = getUnit(par, 1);
+    var toBase = getUnit(par, 2);
     
     if (fromBase == 10)
         return decToBaseN(num, toBase);
@@ -168,33 +179,31 @@ function convert(num) {
 /*
  * Check that input for n1/n2 is valid
  */
-function checkN(whichN) {
-    var n = $("[name='n"+ whichN +"']").val();
+function checkN(par, whichN) {
+    var n = $(par).find("[name='n"+ whichN +"']").val();
     
     // Return if valid input or still n
     if ((n == parseInt(n, 10) && n && n < 37 && n > 0) || n == "n") {
-        $('.message' + whichN).text("");
+        $(par).find('.message' + whichN).text("");
         return true;
     }
     
     // Reset to n and show error message otherwise
    //  $("[name='n"+ whichN +"']").val("n");
-     $('.message' + whichN).text("Invalid value for n! n must be an integer between 0 and 37.");
+     $(par).find('.message' + whichN).text("Invalid value for n! n must be an integer between 0 and 37.");
     return false;
 };
 
-function checkInput() {
-    var base = getUnit(1);
-    var input = $("[name='val1']").val();
-    
-   
+function checkInput(par) {
+    var base = getUnit(par, 1);
+    var input = $(par).find("[name='val1']").val();
     
     // Remove spaces
     input = input.replace(/\s/g, '');
     
     // Return and clear output if no input
     if (input.length == 0) {
-        $("[name='val2']").val("");
+        $(par).find("[name='val2']").val("");
         return false;
     }
     
@@ -202,8 +211,8 @@ function checkInput() {
     if (base == 1) {
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) != 49) {
-                $('.message1').text("Invalid input: a unary number may only contain the digit 1.");
-                $("[name='val2']").val("");
+                 $(par).find('.message1').text("Invalid input: a unary number may only contain the digit 1.");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -213,8 +222,8 @@ function checkInput() {
         for (var i = 0; i < input.length; i++) {
             
             if (input.charCodeAt(i) != 48 && input.charCodeAt(i) != 49) {
-                $('.message1').text("Invalid input: a binary number may only contain digits 0 and 1.");
-                $("[name='val2']").val("");
+                 $(par).find('.message1').text("Invalid input: a binary number may only contain digits 0 and 1.");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -224,8 +233,8 @@ function checkInput() {
          
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) < 48 || input.charCodeAt(i) > 57) {
-                $('.message1').text("Invalid input: a decimal number may only contain digits 0-9.");
-                $("[name='val2']").val("");
+                 $(par).find('.message1').text("Invalid input: a decimal number may only contain digits 0-9.");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -242,8 +251,8 @@ function checkInput() {
         for (var i = start; i < input.length; i++) {
             var c = input.charCodeAt(i);
             if ((c < 48 || c > 57) && (c < 65 || c > 70) && (c < 97 || c > 102)){
-                $('.message1').text("Invalid input: a hexadecimal number may only contain digits 0-9 and characters A-F.");
-                $("[name='val2']").val("");
+                 $(par).find('.message1').text("Invalid input: a hexadecimal number may only contain digits 0-9 and characters A-F.");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -256,8 +265,8 @@ function checkInput() {
             c = input.charCodeAt(i);
 
             if (c < 48 || c > limit) {    
-                $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-"+(base-1)+".");
-                $("[name='val2']").val("");
+                 $(par).find('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-"+(base-1)+".");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -274,10 +283,10 @@ function checkInput() {
             if ((c < 48 || c > 57) && (c < 65 || c > uppercaseLim) && (c < 97 || c > lowercaseLim)) {   
                 // Message for base 11
                 if (base == 11)
-                     $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and character A.");
+                      $(par).find('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and character A.");
                 else
-                     $('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and characters A-"+String.fromCharCode(uppercaseLim)+".");
-                $("[name='val2']").val("");
+                      $(par).find('.message1').text("Invalid input: a number in base "+base+" may only contain digits 0-9 and characters A-"+String.fromCharCode(uppercaseLim)+".");
+                 $(par).find("[name='val2']").val("");
                 return false;
             }
         }
@@ -289,20 +298,20 @@ function checkInput() {
 /*
  * Check if N is valid before converting
  */
-function checkConvertN(whichN) {
+function checkConvertN(par, whichN) {
      // Return if n is still n
-       if ($('#unit'+ whichN +' .baseN').hasClass('active-unit') && checkN(whichN)) {
-            if ($("[name='n"+ whichN +"']").val() === 'n') {
-                $('.message'+whichN).text("Must enter a value for n!");
+       if ($(par).find('#unit'+ whichN +' .baseN').hasClass('active-unit') && checkN(par, whichN)) {
+            if ($(par).find("[name='n"+ whichN +"']").val() === 'n') {
+                $(par).find('.message'+whichN).text("Must enter a value for n!");
                 // Clear output box
-                $("[name='val2']").val('');
+                $(par).find("[name='val2']").val('');
                 return false;
             }
         }
         // Return if n is invalid
-        else if ($('#unit'+ whichN +' .baseN').hasClass('active-unit') && !checkN(whichN)) {
+        else if ($(par).find('#unit'+ whichN +' .baseN').hasClass('active-unit') && !checkN(par, whichN)) {
             // Clear output box
-            $("[name='val2']").val('');
+            $(par).find("[name='val2']").val('');
                 return false;
         }
     return true;
@@ -324,52 +333,82 @@ var main = function() {
     // CONVERT BUTTON
     $('.convert').click(function () {
         
-        // CHECK N 
-        if ($('#unit1 .baseN').hasClass('active-unit') || $('#unit2 .baseN').hasClass('active-unit')) {
+        // Get parent li
+        var par = $(this).closest('li');
         
-            var validBase1 = checkConvertN(1);
-            var validBase2 = checkConvertN(2);
+        // CHECK N 
+        if ($(par).find('#unit1 .baseN').hasClass('active-unit') || $(par).find('#unit2 .baseN').hasClass('active-unit')) {
+        
+            var validBase1 = checkConvertN(par, 1);
+            var validBase2 = checkConvertN(par, 2);
         
             if (!validBase1 || !validBase2)
                 return;
         }
        // Check input then convert
-            if (checkInput()) {
-                var input = getVal1();
+            if (checkInput(par)) {
+                var input = getVal1(par);
                 // Remove spaces
                 input = input.replace(/\s/g, '');
                 
-                var num = convert(input);
-                $("[name='val2']").val(num);
+                var num = convert(par, input);
+                $(par).find("[name='val2']").val(num);
             }  
     });
     
     // REVERSE BUTTON
     $('.reverse').click(function() {
-        reverseUnits();
+        var par = $(this).closest('li');
+        reverseUnits(par);
     });
     
     // CLEAR BUTTON
     $('.clear').click(function () {
-        $("[name='val1']").val('');
-        $("[name='val2']").val('');
+        var par = $(this).closest('li');
+        $(par).find("[name='val1']").val('');
+        $(par).find("[name='val2']").val('');
        
     });
     
     // CHECK INPUT FOR N
     $("[name='n1']").on('blur',function () {
-       checkN(1);
+        var par = $(this).closest('li');
+       checkN(par, 1);
     });
     $("[name='n2']").on('blur',function () {
-       checkN(2);
+         var par = $(this).closest('li');
+       checkN(par, 2);
     });
    
     // CLEAR MESSAGES ON NEW UNIT CLICK
       $('#unit1 span').click(function () {
-       $('.message' + 1).text("");
+          var par = $(this).closest('li');
+       $(par).find('.message1').text("");
     });
        $('#unit2 span').click(function () {
-        $('.message' + 2).text("");
+           var par = $(this).closest('li');
+        $(par).find('.message2').text("");
+    });
+    
+    // ADD BUTTON
+    $('.add').click(function () {
+        
+        // Clone 
+  $('#converters').find('li:first').clone(true).appendTo('#converters');
+    
+      if ($('#converters li').length == 2) { 
+          // Display close button
+ $('.close').css("display","inline");
+     }
+    });
+    
+    // CLOSE BUTTON
+    $('.close').click(function() {
+        $(this).closest('li').remove();
+        
+        if ($('#converters li').length == 1) {
+             $('.close').css("display","none");
+        }
     });
    
 };

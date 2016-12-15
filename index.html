@@ -16,8 +16,8 @@
   
   <body>
     <div id="container">
-    <h1>Base Converter</h1>
-        <ul>
+    <h1><a href="">Base Converter</a></h1>
+        <ul id="converters">
             <li>
       <form>
   <div id="unit1">
@@ -28,7 +28,7 @@
        </div>
           <div class="valInput">
               <input type="text" name="val1"></div>
-          <div style="text-align:center; margin-top: -30px;">↓</div>
+          <div class="arrow">↓</div>
  <div id="unit2">
             <span class="dec">decimal</span>
             <span class="bin active-unit">binary</span>
@@ -38,20 +38,25 @@
           <div class="valInput">
             <input type="text" name="val2"></div>
 </form>
-                </li>
-            </ul>
+             
         <div id="buttons">
             <span class="convert">convert</span>
             <span class="reverse">reverse</span>
             <span class="clear">clear</span>
             <span class="add">+</span>
+            <span class="close">-</span>
        </div>
-    </div>
+   
       
       <div id="messages">
           <div class="message1"></div>
           <div class="message2"></div>
       </div>
+        
+           </li>
+           
+            </ul>
+         </div>
   </body>
   
 </html>

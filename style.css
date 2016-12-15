@@ -50,7 +50,7 @@ input:focus {
     position: relative;
     left: 50%;
     margin-left: 270px;
-    margin-top: -245px;
+    margin-top: -223px;
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 0.5px;
@@ -62,11 +62,17 @@ input:focus {
 .message2 {
     margin-top: 31px;
 }
-ul {
+#converters {
     list-style: none;
     padding: 0;
 }
-
+#converters li {
+    margin-bottom: 40px;
+}
+.arrow {
+    text-align: center;
+    margin: -38px 0px -5px 0px;
+}
 form {
     font-size: 24px;
 }
@@ -85,6 +91,10 @@ form {
 
 #buttons span {
     padding: 0px 10px 0px 10px;
+}
+
+.close {
+    display: none;
 }
 
 #unit1, #unit2, .baseN input {
