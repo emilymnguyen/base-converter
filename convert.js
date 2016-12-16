@@ -368,17 +368,9 @@ var main = function () {
             scrollTop: y - 293
         }, 400, function () {
             // Hide close button if one left
-            if ($('#converters li').length == 2) {
-                $('.close').css("display", "none");
-                // Clear height of container
-                $('#container').css('height', "");
-            }
-            else {
-                // Get and dec height
-                var height = $('#container').css('height');
-                var newHeight = parseInt(height) - 293;
-                $('#container').css('height', newHeight + "px");
-            }
+            if ($('#converters li').length == 2) $('.close').css("display", "none");
+            // Clear height of container
+            $('#container').css('height', "");
         });
     });
 };
