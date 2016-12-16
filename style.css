@@ -43,6 +43,7 @@ input:focus {
     position: relative;
     left: 50%;
     margin-left: -250px;
+    margin-bottom: 80px;
 }
 #messages {
     background-color:rgba(255, 255, 255, 0);
@@ -50,7 +51,7 @@ input:focus {
     position: relative;
     left: 50%;
     margin-left: 270px;
-    margin-top: -223px;
+    margin-top: -209px;
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 0.5px;
@@ -60,7 +61,7 @@ input:focus {
     height: 100px;
 }
 .message2 {
-    margin-top: 31px;
+    margin-top: 16px;
 }
 #converters {
     list-style: none;
@@ -68,6 +69,8 @@ input:focus {
 }
 #converters li {
     margin-bottom: 40px;
+    height: 253px;
+    /* 293 px total */
 }
 .arrow {
     text-align: center;
