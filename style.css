@@ -1,3 +1,6 @@
+html {
+  overflow-y: scroll;
+}
 body {
     background-color: #f9f9f9;
     color: #303030;
