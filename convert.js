@@ -73,9 +73,25 @@ function getHexRemainder(remainder) {
  * Converts a decimal to a given base
  */
 function decToBaseN(dec, base) {
-    var num = [];
+    if (dec > 9007199254740991) return "result too large";
     if (dec === 0 && base != 1) return 0;
     if (base != 1) {
+        return (dec >>> 0).toString(base);
+    }
+    else {
+        if (dec == 0) {
+            return "NaN";
+        }
+        var num = [];
+        while (dec) {
+            num.unshift("1");
+            dec--;
+            if (num.length > 64) return "result too large";
+        }
+    }
+    return num.join("");
+    /*
+    else if (base != 1) {
         while (dec) {
             var remainder = dec % base;
             if (remainder > 9) remainder = getHexRemainder(remainder);
@@ -95,6 +111,7 @@ function decToBaseN(dec, base) {
         }
     }
     return num.join("");
+    */
 };
 /*
  * Converts a number in a given base to decimal
@@ -182,7 +199,7 @@ function checkInput(par) {
     else if (base == 10) {
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) < 48 || input.charCodeAt(i) > 57) {
-                $(par).find('.message1').text("Invalid input: a decimal number can only contain digits 0-9.");
+                $(par).find('.message1').text("Invalid input: must be a positive integer.");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -315,6 +332,8 @@ var main = function () {
         var par = $(this).closest('li');
         $(par).find("[name='val1']").val('');
         $(par).find("[name='val2']").val('');
+        $(par).find('.message1').text("");
+        $(par).find('.message2').text("");
     });
     // CHECK INPUT FOR N
     $("[name='n1']").on('blur', function () {
