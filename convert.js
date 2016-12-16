@@ -74,20 +74,21 @@ function getHexRemainder(remainder) {
  */
 function decToBaseN(dec, base) {
     if (dec > 9007199254740991) return "result too large";
+    // Return 0 if dec is 0
     if (dec === 0 && base != 1) return 0;
-    if (base != 1) {
-        return (dec >>> 0).toString(base);
+    // Base 16
+    if (base == 16) return "0x" + ((dec >>> 0).toString(base)).toUpperCase();
+    // All bases except 16 and 1
+    if (base != 1) return (dec >>> 0).toString(base);
+    // Base 1
+    if (dec == 0) {
+        return "NaN";
     }
-    else {
-        if (dec == 0) {
-            return "NaN";
-        }
-        var num = [];
-        while (dec) {
-            num.unshift("1");
-            dec--;
-            if (num.length > 64) return "result too large";
-        }
+    var num = [];
+    while (dec) {
+        num.unshift("1");
+        dec--;
+        if (num.length > 64) return "result too large";
     }
     return num.join("");
     /*
