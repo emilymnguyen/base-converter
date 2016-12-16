@@ -36,7 +36,6 @@ input:focus {
     border-radius: 30px;
     
     bx-shadow: inset 0px 0px 20px rgba(1, 1, 1, 0.02);
-
 }
 .valInput {
      margin: 10px 0px 40px 0px;
@@ -53,8 +52,8 @@ input:focus {
     width: 100px;
     position: relative;
     left: 50%;
-    margin-left: 270px;
-    margin-top: -209px;
+    margin-left: 265px;
+    margin-top: -210px;
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 0.5px;

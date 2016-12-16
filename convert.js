@@ -162,7 +162,7 @@ function checkInput(par) {
     if (base == 1) {
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) != 49) {
-                $(par).find('.message1').text("Invalid input: a unary number may only contain the digit 1.");
+                $(par).find('.message1').text("Invalid input: a unary number can only contain the digit 1.");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -172,7 +172,7 @@ function checkInput(par) {
     else if (base == 2) {
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) != 48 && input.charCodeAt(i) != 49) {
-                $(par).find('.message1').text("Invalid input: a binary number may only contain digits 0 and 1.");
+                $(par).find('.message1').text("Invalid input: a binary number can only contain digits 0 and 1.");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -182,7 +182,7 @@ function checkInput(par) {
     else if (base == 10) {
         for (var i = 0; i < input.length; i++) {
             if (input.charCodeAt(i) < 48 || input.charCodeAt(i) > 57) {
-                $(par).find('.message1').text("Invalid input: a decimal number may only contain digits 0-9.");
+                $(par).find('.message1').text("Invalid input: a decimal number can only contain digits 0-9.");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -197,7 +197,7 @@ function checkInput(par) {
         for (var i = start; i < input.length; i++) {
             var c = input.charCodeAt(i);
             if ((c < 48 || c > 57) && (c < 65 || c > 70) && (c < 97 || c > 102)) {
-                $(par).find('.message1').text("Invalid input: a hexadecimal number may only contain digits 0-9 and characters A-F.");
+                $(par).find('.message1').text("Invalid input: a hexadecimal number can only contain digits 0-9 and characters A-F.");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -209,7 +209,7 @@ function checkInput(par) {
         for (var i = 0; i < input.length; i++) {
             c = input.charCodeAt(i);
             if (c < 48 || c > limit) {
-                $(par).find('.message1').text("Invalid input: a number in base " + base + " may only contain digits 0-" + (base - 1) + ".");
+                $(par).find('.message1').text("Invalid input: a number in base " + base + " can only contain digits 0-" + (base - 1) + ".");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -224,8 +224,8 @@ function checkInput(par) {
             // Check 0-9, A-uppercaseLim, a-lowercaseLim
             if ((c < 48 || c > 57) && (c < 65 || c > uppercaseLim) && (c < 97 || c > lowercaseLim)) {
                 // Message for base 11
-                if (base == 11) $(par).find('.message1').text("Invalid input: a number in base " + base + " may only contain digits 0-9 and character A.");
-                else $(par).find('.message1').text("Invalid input: a number in base " + base + " may only contain digits 0-9 and characters A-" + String.fromCharCode(uppercaseLim) + ".");
+                if (base == 11) $(par).find('.message1').text("Invalid input: a number in base " + base + " can only contain digits 0-9 and character A.");
+                else $(par).find('.message1').text("Invalid input: a number in base " + base + " can only contain digits 0-9 and characters A-" + String.fromCharCode(uppercaseLim) + ".");
                 $(par).find("[name='val2']").val("");
                 return false;
             }
@@ -270,6 +270,9 @@ function clearSettings(par) {
     // Clear messages
     $(par).find('.message1').text("");
     $(par).find('.message2').text("");
+    // Reset n
+    $(par).find("[name='n1']").val("n");
+    $(par).find("[name='n2']").val("n");
     return;
 };
 /*
