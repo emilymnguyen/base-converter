@@ -307,6 +307,9 @@ var main = function () {
     $('.convert').click(function () {
         // Get parent li
         var par = $(this).closest('li');
+        // Clear messages
+        $(par).find('.message1').text("");
+        $(par).find('.message2').text("");
         // CHECK N 
         if ($(par).find('#unit1 .baseN').hasClass('active-unit') || $(par).find('#unit2 .baseN').hasClass('active-unit')) {
             var validBase1 = checkConvertN(par, 1);
