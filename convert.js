@@ -159,7 +159,7 @@ function checkN(par, whichN) {
     }
     // Reset to n and show error message otherwise
     //  $("[name='n"+ whichN +"']").val("n");
-    $(par).find('.message' + whichN).text("Invalid value for n! n must be an integer between 0 and 37.");
+    $(par).find('.message' + whichN).text("Invalid base: n must be an integer from 1 to 36.");
     return false;
 };
 /*
