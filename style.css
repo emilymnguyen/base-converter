@@ -56,9 +56,13 @@ input:focus {
     font-size: 12px;
     letter-spacing: 0.5px;
     color: #303030;
+    padding: 0;
 }
 .message1, .message2 {
     height: 100px;
+}
+.message1 {
+    position: relative;
 }
 .message2 {
     margin-top: 16px;
