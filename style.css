@@ -32,10 +32,8 @@ input:focus {
     text-align: left;
     font-weight: 200;
     font-family: 'Nunito Sans', sans-serif;
-    
     border-radius: 30px;
-    
-    bx-shadow: inset 0px 0px 20px rgba(1, 1, 1, 0.02);
+  /*  box-shadow: inset 0px 0px 20px rgba(1, 1, 1, 0.02); */
 }
 .valInput {
      margin: 10px 0px 40px 0px;
@@ -53,7 +51,7 @@ input:focus {
     position: relative;
     left: 50%;
     margin-left: 265px;
-    margin-top: -210px;
+    top: -210px;
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 0.5px;
