@@ -91,28 +91,6 @@ function decToBaseN(dec, base) {
         if (num.length > 64) return "result too large";
     }
     return num.join("");
-    /*
-    else if (base != 1) {
-        while (dec) {
-            var remainder = dec % base;
-            if (remainder > 9) remainder = getHexRemainder(remainder);
-            dec = Math.floor(dec / base);
-            num.unshift(remainder);
-        }
-        if (base == 16) num.unshift("0x");
-    }
-    else {
-        if (dec == 0) {
-            return "NaN";
-        }
-        while (dec) {
-            num.unshift("1");
-            dec--;
-            if (num.length > 64) return "result too large";
-        }
-    }
-    return num.join("");
-    */
 };
 /*
  * Converts a number in a given base to decimal
@@ -294,9 +272,33 @@ function clearSettings(par) {
     return;
 };
 /*
+ * 
+ */
+function positionMessages(par) {
+    // Get position of input boxes
+    var val1Pos = $(par).find("[name='val1']").position().top;
+    var val2Pos = $(par).find("[name='val2']").position().top;
+    // Align messages with top of input boxes  
+    $(par).find('.message1').css('top', val1Pos + "px");
+    $(par).find('.message2').css('top', val2Pos + "px");
+    return;
+};
+
+function clearMessages(par, message) {
+    if (message == 1) $(par).find('.message1').text("");
+    else if (message == 2) $(par).find('.message2').text("");
+    else {
+        $(par).find('.message1').text("");
+        $(par).find('.message2').text("");
+    }
+    return;
+};
+/*
  * MAIN FUNCTION
  */
 var main = function () {
+    var par = $('#converters li');
+    positionMessages(par);
     // Update active-unit upon click
     $('#unit1 span').click(function () {
         switchUnits(this, 1);
@@ -309,8 +311,7 @@ var main = function () {
         // Get parent li
         var par = $(this).closest('li');
         // Clear messages
-        $(par).find('.message1').text("");
-        $(par).find('.message2').text("");
+        clearMessages(par, "all");
         // CHECK N 
         if ($(par).find('#unit1 .baseN').hasClass('active-unit') || $(par).find('#unit2 .baseN').hasClass('active-unit')) {
             var validBase1 = checkConvertN(par, 1);
@@ -336,8 +337,7 @@ var main = function () {
         var par = $(this).closest('li');
         $(par).find("[name='val1']").val('');
         $(par).find("[name='val2']").val('');
-        $(par).find('.message1').text("");
-        $(par).find('.message2').text("");
+        clearMessages(par, "all");
     });
     // CHECK INPUT FOR N
     $("[name='n1']").on('blur', function () {
@@ -361,6 +361,8 @@ var main = function () {
     $('.add').click(function () {
         // Append
         var newLi = $('#converters').find('li:first').clone(true).insertAfter($(this).closest('li'));
+        // Position messages and then hide
+        positionMessages(newLi);
         $(newLi).hide();
         // Clear new li settings
         clearSettings(newLi);
@@ -382,6 +384,9 @@ var main = function () {
     });
     // CLOSE BUTTON
     $('.close').click(function () {
+        // Clear messages
+        clearMessages($(this).closest('li'), "all");
+        // Slide up
         $(this).closest('li').slideUp('slow', function () {
             $(this).remove();
         });
